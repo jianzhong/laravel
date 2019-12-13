@@ -1,0 +1,40 @@
+version: '3.7'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: laravel.php-httpd.Dockerfile
+    environment:
+      - GITHUB_USER_NAME=${GITHUB_USER_NAME}
+      - GITHUB_USER_EMAIL=${GITHUB_USER_EMAIL}
+      - DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}?serverVersion=5.7
+    image: jianzhong/php74_httpd_laravel
+    container_name: web
+    volumes:
+      - ..:/var/www/app
+      - ./files/httpd/000-default.conf:/etc/apache2/sites-available/000-default.conf
+    ports:
+      - 80:80
+    networks:
+      - app_db_net
+
+  db:
+    image: mariadb
+    container_name: db
+    restart: always
+    volumes:
+      - db_volume:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    networks:
+      - app_db_net
+
+volumes:
+  db_volume:
+
+networks:
+  app_db_net:
+  
