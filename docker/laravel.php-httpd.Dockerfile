@@ -29,5 +29,7 @@ RUN echo "export PATH=/root/.composer/vendor/bin:$PATH" > ~/.bashrc && \
 
 RUN git config --global user.name "${GITHUB_USER_NAME}" && git config --global user.email "${GITHUB_USER_EMAIL}" 
 
+COPY ./files/httpd/000-default.conf /etc/apache2/sites-available/000-default.conf
+
 WORKDIR /var/www/app
 
