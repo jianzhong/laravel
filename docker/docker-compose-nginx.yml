@@ -15,7 +15,7 @@ services:
   php:
     build:
       context: .
-      dockerfile: laravel.Dockerfile
+      dockerfile: laravel.fpm.Dockerfile
     environment:
       - GITHUB_USER_NAME=${GITHUB_USER_NAME}
       - GITHUB_USER_EMAIL=${GITHUB_USER_EMAIL}
