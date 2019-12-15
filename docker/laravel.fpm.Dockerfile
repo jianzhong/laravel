@@ -4,7 +4,7 @@ ENV GITHUB_USER_NAME="please config git name"
 ENV GITHUB_USER_EMAIL="please config git email"
 
 # Install selected extensions and other stuff
-RUN apk add --update --no-cache autoconf g++ make icu-dev libzip-dev git less bash yarn tree \
+RUN apk add --update --no-cache autoconf g++ make icu-dev libzip-dev git less bash yarn tree npm \
     && docker-php-source extract \
     && docker-php-ext-install opcache intl zip pdo_mysql \
     && pecl channel-update pecl.php.net \
